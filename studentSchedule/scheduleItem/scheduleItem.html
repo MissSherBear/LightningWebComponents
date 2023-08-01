@@ -1,0 +1,135 @@
+<template>
+    <!-- 
+    <div class="container">
+      <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-center slds-m-around_small">
+        <div class="slds-col slds-col-size_4-of-6 slds-shrink-none">
+          {name}Class Name 
+          
+        </div>
+        <div class="slds-col slds-col-size_1-of-6">
+            {units}Units
+          </div>
+      </div>
+      <div class="calendar-card-date slds-col slds-size_1-of-1">
+        <div class="slds-media slds-media_center">
+            <span>Time</span>
+        </div>
+      </div>
+    </div>
+-->
+
+<!--
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-tile type="media">
+            <lightning-icon slot="media" icon-name="standard:education"></lightning-icon>
+            <p class="title">Beginning Digital Photography</p>
+            <p>Units: 3</p>
+
+              <div class="slds-col slds-size_1-of-1">
+                <div class="slds-media slds-media_center">
+                  <lightning-icon
+                    icon-name="utility:checkin"
+                    alternative-text="room"
+                    title="room"
+                    size="xx-small">
+                  </lightning-icon>
+                  <span class="slds-text-color_weak">&nbsp; Room 101 {subject} &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                  <lightning-icon
+                    icon-name="utility:clock"
+                    alternative-text="clock"
+                    title="Clock"
+                    size="xx-small">
+                  </lightning-icon>
+                  <span class="slds-text-color_weak">&nbsp; 10:00 - 10:50 MON {creditHours} </span>
+                </div>
+              </div>
+
+              <div class="slds-col slds-size_1-of-1">
+                <div class="slds-media slds-media_center">
+                  <lightning-icon
+                    icon-name="utility:company"
+                    alternative-text="building"
+                    title="building"
+                    size="xx-small">
+                  </lightning-icon>
+                  <span class="slds-text-color_weak">&nbsp; Westward Building {subject} &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                  <lightning-icon
+                    icon-name="utility:user"
+                    alternative-text="user"
+                    title="User"
+                    size="xx-small">
+                  </lightning-icon>
+                  <span class="slds-text-color_weak">&nbsp; Instructor {creditHours} </span>
+                </div>
+              </div>
+        </lightning-tile>
+    </div>
+-->
+
+<!--
+    <div class="slds-p-around_small lgc-bg">
+        <lightning-tile>
+            <p class="title">Intermediate Spanish II</p>
+            <p>Units: 5</p>
+              <div class="slds-col slds-size_1-of-1">
+                <div class="slds-media slds-media_center">
+                    <lightning-icon icon-name="utility:clock" size="xx-small">
+                    </lightning-icon>
+                        <span class="slds-text-color_weak">&nbsp; 11:00 - 11:50 MON {time} &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                    <lightning-icon icon-name="utility:user" size="xx-small">
+                    </lightning-icon>
+                        <span class="slds-text-color_weak">&nbsp; Juan Pablo {instructor}</span>
+                </div>
+              </div>
+
+              <div class="slds-col slds-size_1-of-1">
+                <div class="slds-media slds-media_center">
+                  <lightning-icon icon-name="utility:company" size="xx-small">
+                  </lightning-icon>
+                    <span class="slds-text-color_weak">&nbsp; Spanish Towers #2 {building} &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                  <lightning-icon icon-name="utility:checkin" size="xx-small">
+                </lightning-icon>
+                    <span class="slds-text-color_weak">&nbsp; Room 250 {roomNumber}</span>
+                </div>
+              </div>
+        </lightning-tile>
+    </div>
+-->
+
+    <div class="slds-p-around_small lgc-bg">
+        <p class="title">{name}</p>
+        <p>{classType}</p>
+            <lightning-icon icon-name="utility:clock" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; <lightning-formatted-date-time value={startTime} hour="numeric" minute="2-digit" time-zone="UTC"></lightning-formatted-date-time>-<lightning-formatted-date-time value={endTime} hour="numeric" minute="2-digit" time-zone="UTC"></lightning-formatted-date-time></span><br>
+            <lightning-icon icon-name="utility:user" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; {instructor}</span><br>
+              <lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; {building}</span><br>
+              <lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp;{roomNumber}</span>
+    </div>
+
+    <!--<div class="slds-p-around_small lgc-bg">
+        <p class="title">Beginning Digital Photography</p>
+            <lightning-icon icon-name="utility:clock" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; 12:00 - 12:50 MON {time}</span><br>
+            <lightning-icon icon-name="utility:user" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; Jimmy Dean {instructor}</span><br>
+              <lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; Photography Building {building}</span><br>
+              <lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; Room 101 {roomNumber}</span>
+    </div>
+
+    <div class="slds-p-around_small lgc-bg">
+        <p class="title">Social Problems</p>
+            <lightning-icon icon-name="utility:clock" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; 1:00 - 1:50 MON {time}</span><br>
+            <lightning-icon icon-name="utility:user" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; Phillis Hophmockel {instructor}</span><br>
+              <lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; History Wing {building}</span><br>
+              <lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+                <span class="slds-text-color_weak">&nbsp; Room 556 {roomNumber}</span>
+    </div>-->
+</template>

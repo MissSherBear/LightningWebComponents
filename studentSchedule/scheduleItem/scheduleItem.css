@@ -1,0 +1,23 @@
+.container {
+    background-color: white;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-ser;
+    max-width: 90%;
+    border: 1px solid rgb(174, 174, 174);
+    border-radius: 1em;
+}
+.lgc-bg {
+    background-color: #FFFFFF;
+    border: 1px solid #F3F5F9;
+    border-radius: 1em;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    margin-bottom: 15px;
+    
+}
+.title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1d6981;
+}
+span {
+    font-size: 12px;
+}
