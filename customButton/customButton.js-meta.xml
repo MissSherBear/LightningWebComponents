@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Custom Button</masterLabel>
+    <description>Custom button component with styling.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="buttonlabel" type="String" default="" label="Button Label" />
+            <property name="buttonlink" type="String" default="" label="Button Link" />
+            <property name="buttonvariant" type="String" default="brand" datasource="brand,neutral,brand-outline,destructive,destructive-text,success,base" label="Button Variant" />
+           <!-- <property name="backgroundcolor" type="String" default="" label="Background Color" />
+            <property name="textcolor" type="String" default="" label="Text Color" />
+            <property name="buttonwidth" type="String" default="" label="Width" />
+            <property name="buttonheight" type="String" default="" label="Height" /> -->
+            <property name="buttonclass" type="String" default="" label="Class" description="CSS class applied to the button (example: slds-align_absolute-center)" />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="buttonlabel" type="String" default="" label="Button Label" />
+            <property name="buttonlink" type="String" default="" label="Button Link" />
+            <property name="buttonvariant" type="String" default="brand" datasource="brand,neutral,brand-outline,destructive,destructive-text,success,base" label="Button Variant" />
+           <!-- <property name="backgroundcolor" type="Color" default="#ff00ff" label="Background Color" />
+            <property name="textcolor" type="Color" default="" label="Text Color" />
+            <property name="buttonwidth" type="String" default="" label="Width" />
+            <property name="buttonheight" type="String" default="" label="Height" /> -->
+            <property name="buttonclass" type="String" default="" label="Class" description="CSS class applied to the button (example: slds-align_absolute-center)" />
+            <property name="buttonicon" type="String" default="" datasource="utility:download, utility:preview, utility:add, utility:call, utility:call, utility:chat, utility:checkout, utility:email, utility:new_window, utility:print, utility:touch_action, utility:upload, utility:search" label="Button Icon" />
+
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="buttonlabel" type="String" default="" label="Button Label" />
+            <property name="buttonlink" type="String" default="" label="Button Link" />
+            <property name="buttonvariant" type="String" default="brand" label="Button Variant" description="Options: brand, neutral, brand-outline, destructive, destructive-text, success, base" />
+            <property name="buttonclass" type="String" default="slds-align_absolute-center" label="Class" description="CSS class applied to the button (example: slds-align_absolute-center)" />
+            <property name="buttonicon" type="String" default="" datasource="utility:download, utility:preview, utility:add, utility:call, utility:call, utility:chat, utility:checkout, utility:email, utility:new_window, utility:print, utility:touch_action, utility:upload, utility:search" label="Button Icon" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,461 @@
+<template>
+	<!-- This lwc uses the lds card slds classes rather than 
+		the lwc-card element due to nested lwc-card behavior 
+		not working as expected with rendering card borders.
+	-->
+	<article class="slds-card">
+		<div class="slds-card__header slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<div class="slds-media__figure">
+					<span class="slds-icon_container slds-icon-standard-account" title="account">
+						<lightning-icon icon-name="standard:avatar" alternative-text="Student Information"></lightning-icon>
+						<span class="slds-assistive-text">Student</span>
+					</span>
+				</div>
+				<div class="slds-media__body">
+					<h2 class="slds-card__header-title">
+						<a class="slds-card__header-link slds-truncate" title={name}>
+							<span>{name}</span>
+						</a>
+					</h2>
+				</div>
+			</header>
+		</div>
+		<div class="slds-card__body slds-card__body_inner">
+			<!-- Card Body -->
+			<!-- Include Student Information that will not be on a seperate card. -->
+			<lightning-record-view-form record-id={accountId} object-api-name="Account">
+				<div class="slds-grid">
+					<div class="slds-col slds-size_1-of-2">
+						<div class="slds-var-p-horizontal_small">
+							<lightning-output-field field-name="Phone"></lightning-output-field>
+						</div>
+						<div class="slds-form-element slds-form-element_horizontal">
+							
+							<div class="slds-form-element__label slds-var-p-horizontal_small">
+								Student Type
+							</div>
+							<div class="slds-form-element__control">
+								<lightning-formatted-text value={enrollmentType} class="slds-form-element__static"></lightning-formatted-text>
+							</div>
+						</div>
+
+						<div class="slds-form-element slds-form-element_horizontal">
+							<div class="slds-form-element__label slds-var-p-horizontal_small">
+								Student Partner
+							</div>
+							<div class="slds-form-element__control">
+								<lightning-formatted-text value={partner} class="slds-form-element__static">
+								</lightning-formatted-text>
+							</div>
+						</div>
+
+						<!-- <div class="slds-form-element slds-form-element_horizontal">
+							<div class="slds-form-element__label slds-var-p-horizontal_small">
+								Final Student Decision Type
+							</div>
+							<div class="slds-form-element__control">
+								<lightning-formatted-text value={studentType} class="slds-form-element__static">
+								</lightning-formatted-text>
+							</div>
+
+						</div> -->
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-output-field field-name="Email__c"></lightning-output-field>
+						<template if:false={isASC}>
+							<lightning-output-field field-name="BillingAddress"></lightning-output-field>
+						</template>
+					</div>
+				</div>
+			</lightning-record-view-form>
+			<template if:true={recordId}>
+				<lightning-record-view-form record-id={recordId} object-api-name="Enrollment_Record__c">
+					<div class="slds-grid ">
+						<div class="slds-col slds-size_1-of-2">
+							<div class="slds-var-p-horizontal_small">
+								<div class="no-hyperlink">
+									<lightning-output-field field-name="Program__c"></lightning-output-field>
+									<lightning-output-field field-name="Enrolled_Credit_Hours__c"></lightning-output-field>
+									<lightning-output-field field-name="Mid_term_GPA__c"></lightning-output-field>
+									<lightning-output-field field-name="Final_GPA__c"></lightning-output-field>
+									<lightning-output-field field-name={finalPartner}></lightning-output-field>
+									<lightning-output-field field-name="School_of_Record_Email__c"></lightning-output-field>
+									<div class="slds-form-element slds-form-element_horizontal">
+										<div class="slds-form-element__label">
+											Academic Provider ID
+										</div>
+										<div class="slds-form-element__control">
+											<lightning-formatted-text value={studentId} class="slds-form-element__static"></lightning-formatted-text>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-2">
+							<lightning-output-field field-name="Withdrawal_Request_Link__c"></lightning-output-field>
+							<lightning-output-field field-name="Academic_Success_Coordinator__c"></lightning-output-field>
+							<lightning-output-field field-name="Student_Life_Coordinator__c"></lightning-output-field>
+							<lightning-output-field field-name="College_Counselor__c"></lightning-output-field>
+							<div class="slds-form-element slds-form-element_horizontal">
+								<div class="slds-form-element__label">
+									Student Success Coach
+								</div>
+								<div class="slds-form-element__control">
+									<lightning-formatted-text value={studentSuccessCoach} class="slds-form-element__static"></lightning-formatted-text>
+								</div>
+							</div>
+			
+						</div>
+					</div>
+				</lightning-record-view-form>
+			</template>
+			<template if:true={applicationId}>
+				<lightning-record-view-form record-id={applicationId} object-api-name="Application__c">
+					<div class="slds-grid">
+						<div class="slds-col slds-size_1-of-2">
+							<div class="slds-var-p-horizontal_small">
+								<lightning-output-field field-name="Sex__c"></lightning-output-field>
+								<lightning-output-field field-name="Standardized_GPA__c"></lightning-output-field>
+								<lightning-output-field field-name="Final_GPA__c"></lightning-output-field>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-2">
+							<lightning-output-field field-name="Race_Ethnicity__c"></lightning-output-field>
+							<lightning-output-field field-name="First_Generation_College_Student__c"></lightning-output-field>
+							<lightning-output-field field-name="Final_GPA__c"></lightning-output-field>
+						</div>
+					</div>
+				</lightning-record-view-form>
+			</template>
+			<template if:false={isASC}>
+				<article class="slds-card slds-card_boundary">
+					<div class="slds-card__header slds-grid">
+						<header class="slds-media slds-media_center slds-has-flexi-truncate">
+							<div class="slds-media__figure">
+								<span class="slds-icon_container slds-icon-standard-account" title="Passport Information">
+									<lightning-icon icon-name="standard:performance" alternative-text="Passport Information"></lightning-icon>
+									<span class="slds-assistive-text">Passport Information</span>
+								</span>
+							</div>
+							<div class="slds-media__body">
+								<h2 class="slds-card__header-title">
+									<div class="slds-truncate" title="Card Header">
+										Passport Information
+									</div>
+								</h2>
+							</div>
+							<div class="slds-no-flex">
+								<button class="slds-button slds-button_neutral" onclick={handlePassportShow}>Show</button>
+							</div>
+						</header>
+					</div>
+					<div class="slds-card__body slds-card__body_inner">
+						<template if:true={passportShow}>
+							<lightning-record-view-form record-id={accountId} object-api-name="Account">
+								<div class="slds-grid">
+									<div class="slds-col slds-size_1-of-2">
+										<div class="slds-var-p-horizontal_small">
+											<lightning-output-field field-name="Passport_Full_Legal_Name__c"></lightning-output-field>
+											<lightning-output-field field-name="Passport_Issuing_Country__c"></lightning-output-field>
+											<lightning-output-field field-name="Passport_Expiration_Date__c"></lightning-output-field>
+										</div>
+									</div>
+									<div class="slds-col slds-size_1-of-2">
+										<div class="slds-var-p-horizontal_small">
+											<lightning-output-field field-name="Passport_Number__c" class="no-select"></lightning-output-field>
+											<lightning-output-field field-name="Passport_Sex__c"></lightning-output-field>
+										</div>
+									</div>
+								</div>
+							</lightning-record-view-form>
+						</template>
+					</div>
+				</article>
+			</template>
+		</div>
+		<template if:true={parentContactIds}>
+			<div class="slds-card__body slds-card__body_inner">
+				<article class="slds-card slds-card_boundary">
+					<div class="slds-card__header slds-grid">
+						<header class="slds-media slds-media_center slds-has-flexi-truncate">
+							<div class="slds-media__figure">
+								<span class="slds-icon_container slds-icon-standard-account" title="Parent Info">
+									<lightning-icon icon-name="standard:call" alternative-text="Parent/Guardian Contacts"></lightning-icon>
+									<span class="slds-assistive-text">Parent/Guardian Contacts</span>
+								</span>
+							</div>
+							<div class="slds-media__body">
+								<h2 class="slds-card__header-title">
+									<div class="no-select">
+										<div class="slds-truncate" title="Card Header">
+											Parent/Guardian Contacts
+										</div>
+									</div>
+								</h2>
+							</div>
+							<div class="slds-no-flex">
+								<button class="slds-button slds-button_neutral" onclick={handleParentShow}>Show</button>
+							</div>
+						</header>
+					</div>
+					<div class="slds-card__body slds-card__body_inner">
+						<template if:true={parentShow}>
+							<template for:each={parentContactIds} for:item="contact">
+								<!-- Transitioned back to lightning-card for simplicity and lack of need for nested borders-->
+								<lightning-card title={contact.Name} key={contact.Id} icon-name="standard:contact" class="slds-var-p-horizontal_small">
+									<!-- <lightning-button label="Log Call" slot="actions" onclick={doNothing}></lightning-button> -->
+									<lightning-record-view-form record-id={contact.Id} object-api-name="Contact">
+										<div class="slds-grid">
+											<div class="slds-col slds-size_1-of-2">
+												<div class="slds-var-p-horizontal_small">
+													<lightning-output-field field-name="Phone"></lightning-output-field>
+													<lightning-output-field field-name="Persona__c"></lightning-output-field>
+												</div>
+											</div>
+											<div class="slds-col slds-size_1-of-2">
+												<div class="slds-var-p-horizontal_small">
+													<lightning-output-field field-name="Email"></lightning-output-field>
+												</div>
+											</div>
+										</div>
+									</lightning-record-view-form>
+								</lightning-card>
+							</template>
+						</template>
+					</div>
+				</article>
+			</div>
+		</template>
+		<template if:true={healthFormId}>
+			<div class="slds-card__body slds-card__body_inner">
+				<article class="slds-card slds-card_boundary">
+					<div class="slds-card__header slds-grid">
+						<header class="slds-media slds-media_center slds-has-flexi-truncate">
+							<div class="slds-media__figure">
+								<span class="slds-icon_container slds-icon-standard-account" title="Health Info">
+									<lightning-icon icon-name="custom:custom94" alternative-text="Health Information"></lightning-icon>
+									<span class="slds-assistive-text">Health information</span>
+								</span>
+							</div>
+							<div class="slds-media__body">
+								<h2 class="slds-card__header-title">
+									<div class="no-select">
+										<div class="slds-truncate" title="Card Header">
+											Health Information
+										</div>
+									</div>
+								</h2>
+							</div>
+							<div class="slds-no-flex">
+								<button class="slds-button slds-button_neutral" onclick={handleHealthShow}>Show</button>
+							</div>
+						</header>
+					</div>
+					<div class="slds-card__body slds-card__body_inner">
+						<template if:true={healthShow}>
+							<lightning-record-view-form record-id={healthFormId} object-api-name="Health_Form__c">
+								<lightning-accordion allow-multiple-sections-open
+									active-section-name={activeSections}
+									>
+									<lightning-accordion-section name="emergencyContact1" label="Emergency Contact 1">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Emergency_Contact_First_Name__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_Last_Name__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_Mobile__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_Phone__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Emergency_Contact_Email__c"></lightning-output-field>
+														<lightning-output-field field-name="Relationship_to_Student__c"></lightning-output-field>
+														<lightning-output-field field-name="State_of_Residence__c"></lightning-output-field>
+														<lightning-output-field field-name="Country_of_Residence__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="emergencyContact2" label="Emergency Contact 2">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Emergency_Contact_2_First_Name__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_2_Last_Name__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_2_Mobile__c"></lightning-output-field>
+														<lightning-output-field field-name="Emergency_Contact_2_Phone__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Emergency_Contact_Email_2__c"></lightning-output-field>
+														<lightning-output-field field-name="Relationship_to_Student_2__c"></lightning-output-field>
+														<lightning-output-field field-name="State_of_Residence_2__c"></lightning-output-field>
+														<lightning-output-field field-name="Country_of_Residence_2__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="medication1" label="Medication 1">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_1_Type__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_1_Reason__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_1_Dosage_and_Frequency__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_1_Side_Effects__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_1_Effects_of_Missed_Dose__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="medication2" label="Medication 2">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_2_Type__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_2_Reason__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_2_Dosage_and_Frequency__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_2_Side_Effects__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_2_Effects_of_Missed_Dose__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="medication3" label="Medication 3">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_3_Type__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_3_Reason__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_3_Dosage_and_Frequency__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_3_Side_Effects__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_3_Effects_of_Missed_Dose__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="medication4" label="Medication 4">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_4_Type__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_4_Reason__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_4_Dosage_and_Frequency__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Medication_4_Side_Effects__c"></lightning-output-field>
+														<lightning-output-field field-name="Medication_4_Effects_of_Missed_Dose__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="additionalMedicationInfo" label="Additional Medication Information">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Plans_to_Stop_Taking_Medication__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Why_Stopping_Medication__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="healthHistory" label="Health History">
+											<div class="slds-grid slds-truncate">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Receiving_Treatment_for_Medical_Cond__c"></lightning-output-field>
+														<lightning-output-field field-name="Has_Student_Been_Hospitalized__c"></lightning-output-field>
+														<lightning-output-field field-name="Receiving_Treatment_for_Mental_Health__c"></lightning-output-field>
+														<lightning-output-field field-name="Seen_Mental_Health_Professional__c"></lightning-output-field>
+														<lightning-output-field field-name="Has_or_Had_COVID_19__c"></lightning-output-field>
+														<lightning-output-field field-name="COVID_19_Vaccinated__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Please_Explain_Treatment__c"></lightning-output-field>
+														<lightning-output-field field-name="Please_Explain_Hospitalization__c"></lightning-output-field>
+														<lightning-output-field field-name="Please_Explain_Mental_Health__c"></lightning-output-field>
+														<lightning-output-field field-name="Please_Explain_Mental_Health_Prof__c"></lightning-output-field>
+														<lightning-output-field field-name="COVID_Details__c"></lightning-output-field>
+														<lightning-output-field field-name="Date_of_COVID_Vaccination__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="swimmingAbility" label="Swimming Ability">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Swimming_Ability_Calm_Water__c"></lightning-output-field>
+														<lightning-output-field field-name="Swimming_Ability_Moving_Water__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Please_Explain_Swim_Calm_Water__c"></lightning-output-field>
+														<lightning-output-field field-name="Please_Explain_Swim_Moving_Water__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="dietaryRestrictions" label="Dietary Restrictions">
+											<div class="slds-grid slds-truncate">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Has_Medical_Dietary_Requirements__c"></lightning-output-field>
+														<lightning-output-field field-name="Has_Personal_or_Religious_Dietary_Rqmts__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Please_Explain_Medical_Dietary__c"></lightning-output-field>
+														<lightning-output-field field-name="Please_Explain_Pers_or_Relig_Dietary__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+										<lightning-accordion-section name="additionalInformation" label="Additional Information">
+											<div class="slds-grid">
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Limitations_to_Participate_in_Activities__c"></lightning-output-field>
+													</div>
+												</div>
+												<div class="slds-col slds-size_1-of-2">
+													<div class="slds-var-p-horizontal_small">
+														<lightning-output-field field-name="Signed_Date__c"></lightning-output-field>
+													</div>
+												</div>
+											</div>
+										</lightning-accordion-section>
+									</lightning-accordion>
+							</lightning-record-view-form>
+						</template>
+					</div>
+				</article>
+			</div>
+		</template>
+	</article>
+</template>

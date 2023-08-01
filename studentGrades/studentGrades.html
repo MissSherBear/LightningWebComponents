@@ -1,0 +1,71 @@
+<template>
+  <!-- <div class="slds-grid">
+    <div class="slds-col slds-size_3-of-12">
+        <h1>Student</h1>
+        <p>{currentUserName}</p>
+    </div>
+    <div class="slds-col slds-size_3-of-12">
+        <h1>Program Semester</h1>
+        <p>{programName}</p>
+    </div>
+    <div class="slds-col slds-size_4-of-12">
+        <h1>Cumulative Semester GPA</h1>
+        <p>GPA</p>
+    </div>
+  </div> -->
+  <h1 style="padding-top: 20px;">Course Grades</h1>
+  <br>
+    <table class="slds-table">
+        <thead>
+            <th>Class Name</th>
+            <th>Instructor</th>
+            <th style="text-align: left;">Credit Hours</th>
+            <th style="text-align: left;">Midterm Letter Grade</th>
+            <th style="text-align: left;">Midterm Grade %</th>
+            <th style="text-align: left; color:#1d6981;">Final Grade</th>
+            <!-- <th style="text-align: left;">Final Grade %</th> -->
+        </thead>
+        <template for:each={sectionEnrollments} for:item="enrollment">
+        <tbody key={enrollment.sectionEnrollmentId}>
+          <tr class="shadow">
+            <td style="color: #1e7891; font-weight:600;">{enrollment.section.academicProviderName}</td>
+            <td>{enrollment.section.instructorName}</td>
+            <td style="text-align: left;">{enrollment.section.reportCreditHours}</td>
+            <td style="text-align: left;">{enrollment.section.midtermLetterGrade}</td>
+            <td style="text-align: left;">{enrollment.section.midTermGradeToSend}</td>
+            <td style="text-align: left; color:#1d6981; font-weight: bold;">{enrollment.section.finalLetterGrade}</td>
+            <!-- <td style="text-align: left;">{enrollment.section.finalGradeToSend}</td> -->
+          </tr>
+          <!-- <tr class="shadow">
+            <td style="color: #1e7891; font-weight:600;">Rhetoric and Research</td>
+            <td>Alfred Longbottom</td>
+            <td style="text-align: left;">3</td>
+            <td style="text-align: left;">A</td>
+            <td style="text-align: left;">B+</td>
+          </tr>
+          <tr class="shadow">
+            <td style="color: #1e7891; font-weight:600;">Digital Literacies</td>
+            <td>Elongated Muskrat</td>
+            <td style="text-align: left;">3</td>
+            <td style="text-align: left;">C-</td>
+            <td style="text-align: left;">B-</td>
+          </tr>
+          <tr class="shadow">
+            <td style="color: #1e7891; font-weight:600;">Pre-Calculus I</td>
+            <td>Jimmy Buffet</td>
+            <td style="text-align: left;">3</td>
+            <td style="text-align: left;">D+</td>
+            <td style="text-align: left;">C+</td>
+          </tr>
+          <tr class="shadow">
+            <td style="color: #1e7891; font-weight:600;">Interpersonal Communication</td>
+            <td>Professor Blowtorch</td>
+            <td style="text-align: left;">4</td>
+            <td style="text-align: left;">A-</td>
+            <td style="text-align: left;">C</td>
+          </tr> -->
+        </tbody>
+    </template>
+    </table>
+    <p style="color:rgb(202, 0, 0);">{noGrades}</p>
+</template>

@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title={title} icon-name={icon}>
+        <template if:false={recordId}>
+            <lightning-spinner alternative-text="Loading..." brand="variant"></lightning-spinner>
+        </template>
+        <template if:true={recordId}>
+            <div class="slds-p-around_small">
+                <template if:true={layout}>
+                    <lightning-record-form
+                        record-id={recordId}
+                        object-api-name={object}
+                        layout-type={layout}
+                        mode={mode}
+                        columns={columns}
+                    ></lightning-record-form>
+                </template>
+                <template if:false={layout}>
+                    <lightning-record-form
+                        record-id={recordId}
+                        object-api-name={object}
+                        fields={fieldSet}
+                        mode={mode}
+                        columns={columns}
+                    ></lightning-record-form>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>

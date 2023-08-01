@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>Generic Record Detail Page</description>
+    <masterLabel>Generic Record Detail</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property
+                name="title"
+                label="Title"
+                type="String"
+                description="The friendly of the object for the record detail to display."
+            ></property>
+            <property
+                name="icon"
+                label="Icon"
+                type="String"
+                description="The icon for the object to display. Viable icons can be referenced from: https://www.lightningdesignsystem.com/icons/"
+            ></property>
+            <property
+                name="object"
+                label="Object API Name"
+                type="String"
+                default=""
+                description="The API name of the object for the record detail."
+                placeholder="Contact"
+                required="true"
+            ></property>
+            <property 
+                name="fields"
+                label="Layout Fields" 
+                type="String"
+                description="A comma-separated list of fields to include in the record detail layout."    
+            ></property>
+            <property
+                name="columns"
+                label="Layout Columns"
+                type="Integer"
+                description="The number of columns to use for the record detail layout."
+                default="2"
+            ></property>
+            <property
+                name="layout"
+                label="Layout Mode"
+                type="String"
+                default=""
+                description="The layout of the record detail page. Supported values are: compact, full"
+                datasource="Compact,Full"
+            ></property>
+            <property
+                name="mode"
+                label="Access Mode"
+                type="String"
+                default="readonly"
+                description="The mode to display the record detail. Supported values are: edit, view, readonly"
+                datasource="edit,view,readonly"
+            ></property>
+        </targetConfig>
+
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="recordId"
+                label="Record Id"
+                type="String"
+                default=""
+                description="The ID of the current record detail page."
+                required="true"
+            ></property>
+            <property
+                name="title"
+                label="Title"
+                type="String"
+                description="The friendly of the object for the record detail to display."
+            ></property>
+            <property
+                name="icon"
+                label="Icon"
+                type="String" 
+                description="The icon for the object to display. Viable icons can be referenced from: https://www.lightningdesignsystem.com/icons/"
+                datasource="standard:contact,standard:article,standard:avatar,standard:call,standard:channel_programs,standard:customers,standard:dashboard,standard:data_model,standard:document,standard:email,standard:event,standard:feed,standard:group_loading,standard:groups,standard:home,standard:lead,standard:opportunity,standard:order,standard:partner_fund_allocation,standard:partner_marketing_budget,standard:person_account,standard:product,standard:question_best,standard:recent,standard:record,standard:service_appointment,standard:service_contract,standard:service_crew,standard:service_resource,standard:service_territory,standard:task,standard:task2,standard:team_member,standard:timesheet,standard:topic,standard:user,standard:work_order,standard:work_order_item,custom:custom1,custom:custom2,custom:custom3,custom:custom4,custom:custom5,custom:custom6,custom:custom7,custom:custom8,custom:custom9,custom:custom10,custom:custom11,custom:custom12,custom:custom13,custom:custom14,custom:custom15,custom:custom16,custom:custom17,custom:custom18,custom:custom19,custom:custom20,custom:custom21,custom:custom22,custom:custom23,custom:custom24,custom:custom25,custom:custom26,custom:custom27,custom:custom28,custom:custom29,custom:custom30,custom:custom31,custom:custom32,custom:custom33,custom:custom34,custom:custom35,custom:custom36,custom:custom37,custom:custom38,custom:custom39,custom:custom40,custom:custom41,custom:custom42,custom:custom43,custom:custom44,custom:custom45,custom:custom46,custom:custom47,custom:custom48,custom:custom49,custom:custom50,custom:custom51,custom:custom52,custom:custom53,custom:custom54,custom:custom55,custom:custom56,custom:custom57,custom:custom58,custom:custom59,custom:custom60,custom:custom61,custom:custom62,custom:custom63,custom:custom64,custom:custom65,custom:custom66,custom:custom67,custom:custom68,custom:custom69,custom:custom70,custom:custom71"
+            ></property>
+            <property
+                name="object"
+                label="Object API Name"
+                type="String"
+                default=""
+                description="The API name of the object for the record detail."
+                placeholder="Contact"
+                required="true"
+            ></property>
+            <property 
+                name="fields"
+                label="Layout Fields" 
+                type="String"
+                description="A comma-separated list of fields to include in the record detail layout."    
+            ></property>
+            <property
+                name="columns"
+                label="Layout Columns"
+                type="Integer"
+                description="The number of columns to use for the record detail layout."
+                default="2"
+            ></property>
+            <property
+                name="layout"
+                label="Layout Mode"
+                type="String"
+                default=""
+                description="The layout of the record detail page. Supported values are: compact, full"
+                datasource="Compact,Full"
+            ></property>
+            <property
+                name="mode"
+                label="Access Mode"
+                type="String"
+                default="readonly"
+                description="The mode to display the record detail. Supported values are: edit, view, readonly"
+                datasource="edit,view,readonly"
+            ></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

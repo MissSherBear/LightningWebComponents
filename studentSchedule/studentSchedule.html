@@ -1,0 +1,155 @@
+<template>
+  <!-- - KANBAN VIEW - -->
+  <lightning-tabset>
+    <lightning-tab label="Weekly Schedule" class="slds-tabs_medium slds-theme_shade" icon-name="utility:date_input">
+      <lightning-layout>
+        <lightning-layout-item flexibility="auto">
+          <div class="custom-box">
+            <p class="title">Monday</p>
+            <template if:true={mondayClasses}>
+              <template for:each={mondayClasses} for:item="scheduledClass">
+                <c-schedule-item
+                  key={scheduledClass.id}
+                  name={scheduledClass.className}
+                  start-time={scheduledClass.startTime}
+                  end-time={scheduledClass.endTime}
+                  time={scheduledClass.time}
+                  instructor={scheduledClass.instructor}
+                  class-type={scheduledClass.classType}
+                  room-number={scheduledClass.roomNumber}
+                  building={scheduledClass.building}
+                  enrollment-status={scheduledClass.enrollmentStatus}
+                ></c-schedule-item>
+              </template>
+            </template>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+          <div class="custom-box">
+            <p class="title">tuesday</p>
+            <template if:true={tuesdayClasses}>
+              <template for:each={tuesdayClasses} for:item="scheduledClass">
+                <c-schedule-item
+                  key={scheduledClass.id}
+                  name={scheduledClass.className}
+                  start-time={scheduledClass.startTime}
+                  end-time={scheduledClass.endTime}
+                  time={scheduledClass.time}
+                  instructor={scheduledClass.instructor}
+                  class-type={scheduledClass.classType}
+                  room-number={scheduledClass.roomNumber}
+                  building={scheduledClass.building}
+                  enrollment-status={scheduledClass.enrollmentStatus}
+                ></c-schedule-item>
+              </template>
+            </template>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+          <div class="custom-box">
+            <p class="title">wednesday</p>
+            <template if:true={wednesdayClasses}>
+              <template for:each={wednesdayClasses} for:item="scheduledClass">
+                <c-schedule-item
+                  key={scheduledClass.id}
+                  name={scheduledClass.className}
+                  start-time={scheduledClass.startTime}
+                  end-time={scheduledClass.endTime}
+                  time={scheduledClass.time}
+                  instructor={scheduledClass.instructor}
+                  class-type={scheduledClass.classType}
+                  room-number={scheduledClass.roomNumber}
+                  building={scheduledClass.building}
+                  enrollment-status={scheduledClass.enrollmentStatus}
+                ></c-schedule-item>
+              </template>
+            </template>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+          <div class="custom-box">
+            <p class="title">Thursday</p>
+            <template if:true={thursdayClasses}>
+              <template for:each={thursdayClasses} for:item="scheduledClass">
+                <c-schedule-item
+                  key={scheduledClass.id}
+                  name={scheduledClass.className}
+                  start-time={scheduledClass.startTime}
+                  end-time={scheduledClass.endTime}
+                  time={scheduledClass.time}
+                  instructor={scheduledClass.instructor}
+                  class-type={scheduledClass.classType}
+                  room-number={scheduledClass.roomNumber}
+                  building={scheduledClass.building}
+                  enrollment-status={scheduledClass.enrollmentStatus}
+                ></c-schedule-item>
+              </template>
+            </template>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+          <div class="custom-box">
+            <p class="title">Friday</p>
+            <template if:true={fridayClasses}>
+              <template for:each={fridayClasses} for:item="scheduledClass">
+                <c-schedule-item
+                  key={scheduledClass.id}
+                  name={scheduledClass.className}
+                  start-time={scheduledClass.startTime}
+                  end-time={scheduledClass.endTime}
+                  time={scheduledClass.time}
+                  instructor={scheduledClass.instructor}
+                  class-type={scheduledClass.classType}
+                  room-number={scheduledClass.roomNumber}
+                  building={scheduledClass.building}
+                  enrollment-status={scheduledClass.enrollmentStatus}
+                ></c-schedule-item>
+              </template>
+            </template>
+          </div>
+        </lightning-layout-item>
+      </lightning-layout>    
+    </lightning-tab>
+    <!-- <lightning-tab label="My Courses" class="slds-tabs_medium slds-theme_shade" icon-name="utility:education">
+      <template if:true={courses}>
+        <template for:each={courses} for:item="scheduledClass">
+          <div class="course-card" key={scheduledClass.name}>
+            <div class="slds-media">
+              <div class="slds-media__figure">
+                <lightning-icon icon-name="standard:article" size="large"></lightning-icon>
+              </div>
+              <div class="slds-media__body">
+                <p class="course-number">{scheduledClass.courseNumber}</p>
+                <p class="course-title">{scheduledClass.className}</p>
+                <div class="slds-text-color_weak">
+                  <lightning-layout>
+                    <lightning-layout-item size="4">
+                      <lightning-icon icon-name="utility:user" size="xx-small"></lightning-icon>
+                        <span>&nbsp; {scheduledClass.instructor}</span><br>
+                        <div style="padding-bottom: 1px;"></div>
+                      <lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+                        <span>&nbsp; {scheduledClass.building}</span><br>
+                        <div style="padding-bottom: 1px;"></div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                      <lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+                        <span>&nbsp;{scheduledClass.roomNumber}</span><br>
+                        <div style="padding-bottom: 1px;"></div>
+                      <lightning-icon icon-name="utility:desktop_and_phone" size="xx-small"></lightning-icon>
+                        <span>&nbsp; {scheduledClass.subject}</span><br>
+                        <div style="padding-bottom: 1px;"></div>
+                    </lightning-layout-item>
+                  </lightning-layout>
+                </div>
+              </div>
+            </div>
+            <p style="padding-top: 15px; padding-bottom: 10px;">{scheduledClass.description}</p>
+            <lightning-badge label={scheduledClass.creditHours}></lightning-badge>
+            <lightning-badge label={scheduledClass.sectionType}></lightning-badge>
+            <lightning-badge label={scheduledClass.enrollmentStatus}></lightning-badge>
+          </div>
+        </template>
+      </template>
+    </lightning-tab> -->
+  </lightning-tabset>
+</template>
