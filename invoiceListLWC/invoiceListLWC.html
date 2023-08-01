@@ -1,0 +1,64 @@
+<template>
+<!--
+    <lightning-card title="My Invoices" icon-name="standard:quotes">
+        <template if:true={invoice.data}>
+            <lightning-datatable key-field="Id"
+                                 data={invoice.data}
+                                 columns={columns}
+                                 hide-checkbox-column="true"  
+                                 onrowaction={handleRowAction}> 
+            >
+            </lightning-datatable>
+        </template>
+    </lightning-card>
+-->
+
+    <lightning-card title="Invoices" icon-name="standard:procedure">
+    <template if:true={invoice.data}>
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Key">Invoice Name</div>
+            </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Amount">Amount Due</div>
+              </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Value">Status</div>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+        <template for:each={invoice.data} for:item="keyValue">   
+          <tr class="slds-hint-parent" key={keyValue.Id}>
+            <th scope="row">
+              <div><a href={keyValue.Invoice_Url__c} data-id={keyValue.Id} onclick={handleClick} target="_self" tabindex="-1">{keyValue.bt_stripe__Subject__c}</a></div>
+            </th>
+            <th scope="row">
+                <div>{keyValue.bt_stripe__Balance_Due_Amount__c}</div>
+            </th>
+            <!-- <th scope="row">
+                <lightning-badge label={keyValue.bt_stripe__Payment_Status__c} ></lightning-badge>
+            </th> -->
+            <th scope="row">
+                <c-invoice-status-color invoicestatus={keyValue.bt_stripe__Payment_Status__c}></c-invoice-status-color>
+            </th>
+            <th scope="row"> 
+               <!-- <a href={keyValue.Invoice_Url__c} data-id={keyValue.Id} onclick={handleClick} target="_blank"><button>View Invoice</button></a> -->  
+                <!-- Using Dataset Property to get ContentDocumentId -->
+                <a href={keyValue.Invoice_Url__c} data-id={keyValue.Id} onclick={handleClick} target="_blank">
+                <lightning-button data-id={keyValue.Id} 
+                                  label="View Invoice" 
+                                  variant="brand" 
+                                  value="view invoice" 
+                                  onclick={callInvoiceUrl}></lightning-button></a>
+            </th>
+          </tr>
+        </template>
+        </tbody>
+      </table>
+    </template>
+</lightning-card>
+
+</template>

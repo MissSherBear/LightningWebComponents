@@ -1,0 +1,28 @@
+.status-green {
+    background: #ecffd2; 
+    color:#4dc257ad; 
+    text-transform:uppercase; 
+    border: solid 1px #4dc257ad; 
+    border-radius: 5px;
+  }
+  .status-yellow {
+    background: #fff5d2;
+    color:#F6C180; 
+    text-transform:uppercase; 
+    border: solid 1px #F6C180; 
+    border-radius: 5px;
+  }
+  .status-red {
+    background: #ffded2; 
+    color:#f68280; 
+    text-transform:uppercase; 
+    border: solid 1px #f68280; 
+    border-radius: 5px;
+  }
+  .status-blue {
+    background: #d2fcff;
+    color:#4cb2ff; 
+    text-transform:uppercase; 
+    border: solid 1px #4cb2ff; 
+    border-radius: 5px;
+  }
