@@ -1,0 +1,21 @@
+.blue {
+    --slds-c-badge-color-background: var(--slds-c-badge-color-background, lightskyblue);
+}
+.yellow {
+    --slds-c-badge-color-background: yellow;
+}
+.green {
+    --slds-c-badge-color-background: lightgreen;
+    
+}
+.red {
+    --slds-c-badge-color-background: lightcoral;
+}
+
+span.slds-badge.blue {
+    background-color: blue;
+}
+
+.slds-badge {
+    color: green;
+}
