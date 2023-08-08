@@ -45,6 +45,11 @@ A collection of my custom Lightning Web Components (LWCs) that enhance the funct
   <summary>Invoice PDF</summary>
 </details>
 <details>
+  <summary>Random Color Picker</summary>
+
+  ![](https://github.com/MissSherBear/LightningWebComponents/blob/main/randomColorPicker/random-color-picker.gif)
+</details>
+<details>
   <summary>Record Creator</summary>
 </details>
 <details>
