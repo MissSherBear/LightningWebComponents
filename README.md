@@ -8,7 +8,9 @@ A collection of my custom Lightning Web Components (LWCs) that enhance the funct
 <details>
   <summary>Confetti</summary>
 
-  ![](https://github.com/MissSherBear/LightningWebComponents/blob/main/confetti/confetti-lwc.gif)
+  <img src ="./confetti/confetti-basicCannon.gif" width="500" />
+  <img src ="./confetti/confetti-randomCannon.gif" width="500" />
+  <img src ="./confetti/confetti-fireworks.gif" width="500" />
 
   Code for static resource confetti.js file:
   ```javascript
